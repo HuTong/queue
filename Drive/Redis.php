@@ -1,5 +1,5 @@
 <?php
-namespace Hutong\Queue\Redis;
+namespace Hutong\Queue\Drive;
 
 /**
  * @desc redis 存储
@@ -26,6 +26,6 @@ class Redis
 
     public function stats()
     {
-        
+
     }
 }

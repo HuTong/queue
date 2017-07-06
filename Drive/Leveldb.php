@@ -1,5 +1,5 @@
 <?php
-namespace Hutong\Queue\Leverdb;
+namespace Hutong\Queue\Drive;
 
 /**
  * @desc leverdb 存储

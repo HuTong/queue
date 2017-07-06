@@ -1,5 +1,5 @@
 <?php
-namespace Hutong\Queue\Array;
+namespace Hutong\Queue\Drive;
 
 /**
  * @desc array 存储
