@@ -15,7 +15,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-          "HuTong\\queue\\": ""
+          "HuTong\\Queue\\": ""
         }
     }
 }
