@@ -2,7 +2,7 @@
 namespace Hutong\Queue\Drive;
 
 /**
-* 数据库处理
+* @desc levelDB 存储
 */
 class Leveldb
 {
