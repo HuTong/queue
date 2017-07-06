@@ -4,11 +4,10 @@ namespace Hutong\Queue\Drive;
 /**
  * @desc array 存储
  */
-
-class Array
+class Arr
 {
     private $config;
-    private $container;
+    private $container = [];
 
     public function __construct($config)
     {

@@ -20,17 +20,19 @@ class Server
             }else{
                 throw new \Exception('列队类型不能为空');
             }
-            
+
+            $this->config = $config;
+
             $this->instance = new $class($config);
         }
     }
 
-    public function onStart(Swoole\Server $serv, $worker_id)
+    public function onStart(\Swoole\Server $serv, $worker_id)
     {
 
     }
 
-    public function onReceive(Swoole\Server $serv, $fd, $reactor_id, $data)
+    public function onReceive(\Swoole\Server $serv, $fd, $reactor_id, $data)
     {
         $op = strtolower(strstr($data, ' ', true));
 
@@ -61,7 +63,7 @@ class Server
     {
         $swoole_setting = $this->config['swoole'];
 
-        $server = new Swoole\Server($host, $port, SWOOLE_BASE);
+        $server = new \Swoole\Server($host, $port, SWOOLE_BASE);
         $swoole_setting['open_eof_check'] = true;
         $swoole_setting['open_eof_split'] = true;
         $swoole_setting['package_eof'] = self::EOF;

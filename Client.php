@@ -13,7 +13,7 @@ class Client
 
     public function __construct($ip = '127.0.0.1', $port = 9510, $timeout = 2.0)
     {
-        $client = new Swoole\Client(SWOOLE_SOCK_TCP);
+        $client = new \Swoole\Client(SWOOLE_SOCK_TCP);
         $client->set(array('open_eof_check' => true, 'package_eof' => self::EOF));
 
         if (!$client->connect($ip, $port, $timeout))

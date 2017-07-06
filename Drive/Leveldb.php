@@ -2,10 +2,9 @@
 namespace Hutong\Queue\Drive;
 
 /**
- * @desc leverdb 存储
- */
-
-class Leverdb
+* 数据库处理
+*/
+class Leveldb
 {
     private $config;
 
