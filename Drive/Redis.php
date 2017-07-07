@@ -1,10 +1,12 @@
 <?php
 namespace Hutong\Queue\Drive;
 
+use HuTong\Queue\Contract;
+
 /**
  * @desc redis 存储
  */
-class Redis
+class Redis implements Contract
 {
     private $config;
     private $container;

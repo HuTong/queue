@@ -33,7 +33,7 @@ $config = array(
 ```
 include './vendor/autoload.php';
 
-$serv = new HuTong\Queue\Server(array('type'=>'Arr','swoole'=>array('worker_num'=>1)));
+$serv = new HuTong\Queue\Server($config);
 $serv->listen();
 ```
 

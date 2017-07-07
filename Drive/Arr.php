@@ -1,10 +1,12 @@
 <?php
 namespace Hutong\Queue\Drive;
 
+use HuTong\Queue\Contract;
+
 /**
  * @desc array 存储
  */
-class Arr
+class Arr implements Contract
 {
     private $config;
     private $container = [];
