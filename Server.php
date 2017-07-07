@@ -15,21 +15,26 @@ class Server
     {
         if(!isset($this->instance))
         {
-            if(isset($config['type'])){
-                $class = "HuTong\Queue\Drive\\".$config['type'];
-            }else{
+            if(!isset($config['type'])){
                 throw new \Exception('列队类型不能为空');
             }
 
             $this->config = $config;
-
-            $this->instance = new $class($config);
         }
     }
 
     public function onStart(\Swoole\Server $serv, $worker_id)
     {
+        if(!isset($this->instance))
+        {
+            if(isset($this->config['type'])){
+                $class = "HuTong\Queue\Drive\\".$this->config['type'];
+            }else{
+                throw new \Exception('列队类型不能为空');
+            }
 
+            $this->instance = new $class($this->config);
+        }
     }
 
     public function onReceive(\Swoole\Server $serv, $fd, $reactor_id, $data)
@@ -48,20 +53,30 @@ class Server
 
             $serv->send($fd, 'OK '.self::EOF);
         } elseif($op == 'stats') {
+            $rs = $this->instance->stats();
 
+            $serv->send($fd, 'OK '.$rs.self::EOF);
+        } elseif($op == 'clear') {
+            $this->instance->clear();
+
+            $serv->send($fd, 'OK '.self::EOF);
         } else {
-
+            $serv->send($fd, 'ERR unsupported command ['.$op.']'.self::EOF);
         }
     }
 
     public function onStop()
     {
-
+        $this->instance->stop();
+        unset($this->instance);
     }
 
-    public function listen($host = '0.0.0.0', $port = 9510)
+    public function listen()
     {
-        $swoole_setting = $this->config['swoole'];
+        $host = isset($this->config['host']) ? $this->config['host'] : '0.0.0.0';
+        $port = isset($this->config['port']) ? $this->config['port'] : 9510;
+
+        $swoole_setting = isset($this->config['swoole']) ? $this->config['swoole'] : array();
 
         $server = new \Swoole\Server($host, $port, SWOOLE_BASE);
         $swoole_setting['open_eof_check'] = true;
