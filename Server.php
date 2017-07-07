@@ -76,7 +76,7 @@ class Server
         $host = isset($this->config['host']) ? $this->config['host'] : '0.0.0.0';
         $port = isset($this->config['port']) ? $this->config['port'] : 9510;
 
-        $swoole_setting = isset($this->config['swoole']) ? $this->config['swoole'] : array();
+        $swoole_setting = isset($this->config['server']) ? $this->config['server'] : array();
 
         $server = new \Swoole\Server($host, $port, SWOOLE_BASE);
         $swoole_setting['open_eof_check'] = true;

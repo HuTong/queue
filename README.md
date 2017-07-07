@@ -8,15 +8,18 @@ $config = array(
     'type' => 'Arr',
     'host' => '0.0.0.0',
     'port' => '9510',
-    'set' => array(
+    'server' => array(
         'worker_num' => 1,
-    ),
+    )
 );
 2、redis存储
 $config = array(
     'type' => 'Redis',
     'host' => '0.0.0.0',
     'port' => '9510',
+    'server' => array(
+        'worker_num' => 1,
+    ),
     'set' => array(
         'host' => '127.0.0.1',
         'port' => '6379',
