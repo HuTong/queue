@@ -20,9 +20,14 @@ class Redis implements Contract
         $this->container = new \Redis();
         $this->container->connect($this->config['host'], $this->config['port']);
 
-        if(isset($this->config['password']) && $this->config['password'])
+        if (isset($this->config['password']) && $this->config['password'])
         {
             $this->container->auth($this->config['password']);
+        }
+
+        if (isset($this->config['dbindex']) && $this->config['dbindex'])
+        {
+            $this->container->select($this->config['dbindex']);
         }
     }
 
