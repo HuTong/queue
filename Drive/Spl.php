@@ -4,31 +4,36 @@ namespace Hutong\Queue\Drive;
 use HuTong\Queue\Contract;
 
 /**
- * @desc array 存储
+ * @desc redis 存储
  */
-class Arr implements Contract
+class Spl implements Contract
 {
     private $config;
-    private $container = [];
+    private $container;
     private $pop_count = 0;
     private $push_count = 0;
-
 
     public function __construct($config)
     {
         $this->config = $config;
+
+        $this->container = new \SplQueue();
     }
 
     public function pop()
     {
         $this->pop_count ++;
-        return array_shift($this->container);
+        return $this->container->dequeue();
     }
 
     public function push($data)
     {
-        $this->push_count ++;
-        return array_push($this->container, $data);
+        try {
+            $this->push_count ++;
+            return $this->container->enqueue($data);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     public function stats()
@@ -36,7 +41,7 @@ class Arr implements Contract
         $info = array(
             'pop_count' => $this->pop_count,
             'push_count'=> $this->push_count,
-            'head_index'=> count($this->container)
+            'head_index'=> $this->container->count()
         );
         return json_encode($info);
     }
@@ -45,7 +50,11 @@ class Arr implements Contract
     {
         $this->pop_count = 0;
         $this->push_count = 0;
-        unset($this->container);
-        $this->container = [];
+        $count = $this->container->count();
+
+        for ($i = 0; $i < $count; $i++)
+        {
+            $this->container->dequeue();
+        }
     }
 }

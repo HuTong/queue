@@ -32,15 +32,6 @@ interface Contract
     public function stats();
 
     /**
-     * 停止列队
-     * @return void
-     *
-     * @author hutong
-     * @date   2017-07-07
-     */
-    public function stop();
-
-    /**
      * 清空列队数据
      * @return void
      *

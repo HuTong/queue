@@ -52,14 +52,9 @@ class Redis implements Contract
         $info = array(
             'pop_count' => $this->pop_count,
             'push_count'=> $this->push_count,
-            'head_index'=> $this->push_count - $this->pop_count
+            'head_index'=> $this->container->llen($this->config['listName'])
         );
         return json_encode($info);
-    }
-
-    public function stop()
-    {
-        unset($this->container);
     }
 
     public function clear()

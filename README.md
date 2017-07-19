@@ -27,6 +27,15 @@ $config = array(
         'listName' => 'queueList',
     ),
 );
+3、SplQueue存储
+$config = array(
+    'type' => 'Spl',
+    'host' => '0.0.0.0',
+    'port' => '9510',
+    'server' => array(
+        'worker_num' => 1,
+    )
+);
 ```
 
 ### 服务端
